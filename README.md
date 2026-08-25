@@ -1,7 +1,3 @@
-Here is a suggested README for the project, based on the provided files.
-
------
-
 # Assignment 2 AED: Implementation and Analysis of List Data Structures
 
 This project was developed as part of the Algorithms and Data Structures (AED) course. The main objective is the implementation of a custom list data structure (`FintList`) and its comparative analysis against a standard linked list (`LinkedList`).
