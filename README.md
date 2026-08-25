@@ -1,87 +1,83 @@
-Aqui está uma sugestão de README para o projeto, com base nos ficheiros fornecidos.
+Here is a suggested README for the project, based on the provided files.
 
 -----
 
-# Trabalho 2 AED: Implementação e Análise de Estruturas de Dados de Lista
+# Assignment 2 AED: Implementation and Analysis of List Data Structures
 
-Este projeto foi desenvolvido no âmbito da disciplina de Algoritmos e Estruturas de Dados (AED). O objetivo principal é a implementação de uma estrutura de dados de lista personalizada (`FintList`) e a sua comparação de desempenho (análise temporal) com uma implementação de lista ligada (`LinkedList`).
+This project was developed as part of the Algorithms and Data Structures (AED) course. The main objective is the implementation of a custom list data structure (`FintList`) and its comparative analysis against a standard linked list (`LinkedList`).
 
-## Estruturas de Dados Implementadas
+## Implemented Data Structures
 
-O projeto foca-se em duas implementações principais de listas:
+The project focuses on two primary list implementations:
 
-### 1\. FintList (Fast Integer List)
+### 1. FintList (Fast Integer List)
 
-(Ficheiro: `src/aed/collections/FintList.java`)
+(File: `src/aed/collections/FintList.java`)
 
-`FintList` é uma implementação de lista duplamente ligada, otimizada especificamente para o tipo primitivo `int`.
+`FintList` is a doubly-linked list implementation optimized specifically for the primitive `int` type.
 
-**Características Principais:**
+Key features:
 
-  * **Baseada em Arrays Paralelos:** Em vez de alocar objetos `Node` separados, a lista utiliza três arrays (`elements`, `next_index`, `prev_index`) para gerir os dados e as ligações.
-  * **Gestão de Memória:** Implementa uma lista de índices livres (`free_index`) que reutiliza posições de memória de elementos removidos, reduzindo a necessidade de *garbage collection* e compactação.
-  * **Otimização de Acesso (Cache):** Mantém um registo do último nó acedido (`lastUsedNode` e `lastArrayPosition`). Se um acesso subsequente (`get`, `addAt`, `removeAt`) for próximo do último índice, a procura começa a partir dessa posição em cache em vez de começar sempre pelo `head` ou `tail`, otimizando acessos locais.
-  * **Funcionalidades Adicionais:** Suporta operações funcionais como `map` (UnaryOperator) e `reduce` (BinaryOperator).
-  * **Shell Interativo:** O método `main` dentro de `FintList.java` fornece um shell de linha de comandos interativo para testar todas as operações da lista (ex: `addAt`, `remove`, `reverse`, `print`, `map`, etc.).
+- Array-based storage: Instead of allocating separate `Node` objects, the list uses three parallel arrays (`elements`, `next_index`, `prev_index`) to manage the data and the connections.
+- Memory management: Implements a free index list (`free_index`) to reuse positions of removed elements, reducing allocations and pressure on the garbage collector.
+- Access optimization (cache): Tracks the last accessed node (`lastUsedNode` and `lastArrayPosition`). If a subsequent access (`get`, `addAt`, `removeAt`) is near the last access, the list can use this cached position to accelerate traversal.
+- Additional operations: Supports functional-style operations like `map` (UnaryOperator) and `reduce` (BinaryOperator).
+- Interactive shell: A `main` method inside `FintList.java` provides a command-line shell to test list operations (e.g., `addAt`, `remove`, `reverse`, `print`).
 
-### 2\. LinkedList
+### 2. LinkedList
 
-(Ficheiro: `src/aed/collections/LinkedList.java`)
+(File: `src/aed/collections/LinkedList.java`)
 
-`LinkedList` é uma implementação genérica (`<T>`) de uma lista ligada (simples).
+`LinkedList` is a generic (`<T>`) singly linked list implementation.
 
-**Características Principais:**
+Key features:
 
-  * **Baseada em Nós (Nodes):** Utiliza uma classe interna `Node` que armazena o item e uma referência ao próximo nó (`next`).
-  * **Operações Standard:** Implementa as operações comuns de lista, como `add` (no início), `remove` (do início), `addAt`, `removeAt`, `get`, `set` e `reverse`.
-  * **Cópia:** Fornece um método `shallowCopy`.
+- Node-based representation: Uses an inner `Node` class that stores the item and a reference to the next node (`next`).
+- Standard operations: Implements common list operations such as `add` (at the front), `remove` (from the front), `addAt`, `removeAt`, `get`, `set`, and `reverse`.
+- Copy: Provides a `shallowCopy` method.
 
-## Análise de Desempenho
+## Performance Analysis
 
-(Ficheiros: `src/aed/collections/Main.java` e `src/aed/collections/TemporalAnalysisUtils.java`)
+(Files: `src/aed/collections/Main.java` and `src/aed/collections/TemporalAnalysisUtils.java`)
 
-O núcleo do projeto é a análise temporal comparativa entre a `FintList` e a `LinkedList`.
+The core of the project performs a temporal (time) comparison between `FintList` and `LinkedList`.
 
-  * **Ponto de Entrada:** `Main.java` é o ponto de entrada para os testes de desempenho.
-  * **Metodologia:** A classe `TemporalAnalysisUtils` fornece métodos para medir o tempo de CPU (`getAverageCPUTime` usando `ThreadMXBean`) e executar testes de "razão dobrada" (`runDoublingRatioTest`).
-  * **Testes Realizados:** O `Main.java` compara as duas estruturas de dados no desempenho das seguintes operações:
-      * `addAt` (inserção em índice aleatório)
-      * `removeAt` (remoção em índice aleatório)
-      * `deepCopy` (para `FintList`) vs. `shallowCopy` (para `LinkedList`)
+- Entry point: `Main.java` is the entry point for the performance tests.
+- Methodology: `TemporalAnalysisUtils` contains utilities for measuring CPU time (e.g., `getAverageCPUTime` using `ThreadMXBean`) and for running doubling-ratio tests.
+- Tests performed: `Main.java` compares the two data structures on the performance of the following operations:
+  - `addAt` (insertion at a random index)
+  - `removeAt` (removal at a random index)
+  - `deepCopy` (for `FintList`) vs `shallowCopy` (for `LinkedList`)
 
-## Como Executar
+## How to Run
 
-O projeto tem dois pontos de entrada principais:
+The project has two main entry points:
 
-1.  **Executar a Análise de Desempenho:**
+1. Run the Performance Analysis:
 
-      * Compile e execute a classe `Main`.
-      * Isto irá correr os testes comparativos (ex: `ensaioGraficoAddAt`, `ensaioRazaoDobradaRemoveAt`, etc.) e imprimir os resultados (complexidade vs. tempo em ms) para ambas as listas na consola.
+   - Compile and run the `Main` class.
+   - This will execute the comparative tests (e.g., `ensaioGraficoAddAt`, `ensaioRazaoDobradaRemoveAt`, etc.) and print results (complexity vs. time in ms) for both lists to the console.
 
-    <!-- end list -->
+   ```bash
+   # (After compiling the .java files)
+   java aed.collections.Main
+   ```
 
-    ```bash
-    # (Após compilar os ficheiros .java)
-    java aed.collections.Main
-    ```
+2. Run the FintList Interactive Shell:
 
-2.  **Executar o Shell Interativo da FintList:**
+   - Compile and run the `FintList` class.
+   - This will start an interactive shell where you can test `FintList` methods.
 
-      * Compile e execute a classe `FintList`.
-      * Isto iniciará um shell interativo onde pode testar os métodos da `FintList`.
+   ```bash
+   # (After compiling the .java files)
+   java aed.collections.FintList
+   ```
 
-    <!-- end list -->
+   Example commands: `add 10`, `add 20`, `addAt 1 15`, `print`, `get 1`, `removeAt 0`, `reverse`, `print`.
 
-    ```bash
-    # (Após compilar os ficheiros .java)
-    java aed.collections.FintList
-    ```
+## Project Structure (src)
 
-      * **Comandos de Exemplo:** `add 10`, `add 20`, `addAt 1 15`, `print`, `get 1`, `removeAt 0`, `reverse`, `print`.
-
-## Estrutura do Projeto (src)
-
-  * `src/aed/collections/FintList.java`: Implementação da lista otimizada baseada em arrays.
-  * `src/aed/collections/LinkedList.java`: Implementação da lista ligada genérica.
-  * `src/aed/collections/Main.java`: Ponto de entrada para os testes de análise temporal.
-  * `src/aed/collections/TemporalAnalysisUtils.java`: Classe utilitária para medição de desempenho.
+- `src/aed/collections/FintList.java`: Array-based optimized list implementation for `int`.
+- `src/aed/collections/LinkedList.java`: Generic linked list implementation.
+- `src/aed/collections/Main.java`: Entry point for temporal/performance tests.
+- `src/aed/collections/TemporalAnalysisUtils.java`: Utility class for performance measurement.
