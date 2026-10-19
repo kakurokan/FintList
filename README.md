@@ -1,5 +1,7 @@
 # Assignment 2 AED: Implementation and Analysis of List Data Structures
 
+[![CI](https://github.com/kakurokan/FintList/actions/workflows/ci.yml/badge.svg)](https://github.com/kakurokan/FintList/actions/workflows/ci.yml)
+
 This project was developed as part of the Algorithms and Data Structures (AED) course. The main objective is the implementation of a custom list data structure (`FintList`) and its comparative analysis against a standard linked list (`LinkedList`).
 
 ## Implemented Data Structures
@@ -8,7 +10,7 @@ The project focuses on two primary list implementations:
 
 ### 1. FintList (Fast Integer List)
 
-(File: `src/aed/collections/FintList.java`)
+(File: `src/main/java/aed/collections/FintList.java`)
 
 `FintList` is a doubly-linked list implementation optimized specifically for the primitive `int` type.
 
@@ -22,7 +24,7 @@ Key features:
 
 ### 2. LinkedList
 
-(File: `src/aed/collections/LinkedList.java`)
+(File: `src/main/java/aed/collections/LinkedList.java`)
 
 `LinkedList` is a generic (`<T>`) singly linked list implementation.
 
@@ -34,7 +36,7 @@ Key features:
 
 ## Performance Analysis
 
-(Files: `src/aed/collections/Main.java` and `src/aed/collections/TemporalAnalysisUtils.java`)
+(Files: `src/main/java/aed/collections/Main.java` and `src/main/java/aed/collections/TemporalAnalysisUtils.java`)
 
 The core of the project performs a temporal (time) comparison between `FintList` and `LinkedList`.
 
@@ -44,6 +46,18 @@ The core of the project performs a temporal (time) comparison between `FintList`
   - `addAt` (insertion at a random index)
   - `removeAt` (removal at a random index)
   - `deepCopy` (for `FintList`) vs `shallowCopy` (for `LinkedList`)
+
+## Build and test
+
+Requirements: JDK 17 or later and Maven 3.9 or later.
+
+The project uses a standard Maven layout (`src/main/java`, `src/test/java`). JUnit 5 tests for `FintList` and `LinkedList` live in `src/test/java/aed/collections`.
+
+```bash
+mvn test
+```
+
+Continuous integration runs `mvn -B test` on every push and pull request (`.github/workflows/ci.yml`); the badge at the top of this file shows the latest result.
 
 ## How to Run
 
@@ -55,8 +69,8 @@ The project has two main entry points:
    - This will execute the comparative tests (e.g., `ensaioGraficoAddAt`, `ensaioRazaoDobradaRemoveAt`, etc.) and print results (complexity vs. time in ms) for both lists to the console.
 
    ```bash
-   # (After compiling the .java files)
-   java aed.collections.Main
+   # after `mvn compile`
+   java -cp target/classes aed.collections.Main
    ```
 
 2. Run the FintList Interactive Shell:
@@ -65,15 +79,17 @@ The project has two main entry points:
    - This will start an interactive shell where you can test `FintList` methods.
 
    ```bash
-   # (After compiling the .java files)
-   java aed.collections.FintList
+   # after `mvn compile`
+   java -cp target/classes aed.collections.FintList
    ```
 
    Example commands: `add 10`, `add 20`, `addAt 1 15`, `print`, `get 1`, `removeAt 0`, `reverse`, `print`.
 
-## Project Structure (src)
+## Project Structure
 
-- `src/aed/collections/FintList.java`: Array-based optimized list implementation for `int`.
-- `src/aed/collections/LinkedList.java`: Generic linked list implementation.
-- `src/aed/collections/Main.java`: Entry point for temporal/performance tests.
-- `src/aed/collections/TemporalAnalysisUtils.java`: Utility class for performance measurement.
+- `src/main/java/aed/collections/FintList.java`: Array-based optimized list implementation for `int`.
+- `src/main/java/aed/collections/LinkedList.java`: Generic linked list implementation.
+- `src/main/java/aed/collections/Main.java`: Entry point for temporal/performance tests.
+- `src/main/java/aed/collections/TemporalAnalysisUtils.java`: Utility class for performance measurement.
+- `src/test/java/aed/collections/`: JUnit 5 tests for `FintList` and `LinkedList`.
+- `pom.xml`: Maven build configuration (Java 17, JUnit 5).
