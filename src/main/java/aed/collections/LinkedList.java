@@ -89,6 +89,7 @@ public class LinkedList<T> {
 
         newNode.next = n;
         previous.next = newNode;
+        this.size++;
     }
 
     public T removeAt(int index) {
@@ -107,6 +108,7 @@ public class LinkedList<T> {
         }
 
         previous.next = n.next;
+        this.size--;
 
         return n.item;
     }
